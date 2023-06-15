@@ -1,0 +1,45 @@
+Now try to delete the Pods one by one (first voting Pod, then worker pod, then db pod) and see what happens to the voting and result app after deleting.
+
+1. Vote Pod Deletion
+[Ans] - Nothing happens, voting pod started again as its running as deployment, FrontEnd and BackEnd working fine.
+cmd - kubectl delete po vote-94849dc97-mkcvk
+
+
+2. Worker Pod Deletion
+[Ans] - Nothing happens, Worker pod started again, FrontEnd and BackEnd working fine.
+cmd - kubectl delete po worker-dd46d7584-nqllj
+
+=====================
+Logs after restart
+=====================
+Connected to db
+Found redis at 10.110.228.216
+Connecting to redis
+Processing vote for 'a' by 'ffa8a0a73562db6'
+
+
+2. DB Pod Deletion
+[Ans] - DB pod started again, Result restared automatically
+cmd - kubectl delete po db-b54cd94f4-lp98f
+
+======================
+Logs from result pod
+======================
+App running on port 80
+Connected to db
+Error performing query: error: relation "votes" does not exist
+Error performing query: error: relation "votes" does not exist
+Error performing query: error: relation "votes" does not exist
+Error performing query: error: relation "votes" does not exist
+
+4. your comment on WHY result app STOPPED working after db pod stop
+[Ans] - Result pod query the result from db, while we deleted the DB Pod result pod was unable to connect to db, So it got crash and restared.
+
+
+5. your answer to HOW YOU MADE THE RESULT POD work.
+[Ans] - We did nothing, result pod stared automatically and tries to connect db pod, once it got connected it was working fine.
+
+
+6. Some jargons (just names are enough- dont need sentences) that you learnt from the  Training session
+[Ans] - Training session was very good, we got lots of idea related to docker and kubernetes. It will help us to work in projects.
+
